@@ -269,18 +269,21 @@ NSString *smtpPartContentTransferEncodingKey = @"smtpPartContentTransferEncoding
     if ((self.inputStream != nil) && (self.outputStream != nil)){
         self.sendState = smtpConnecting;
         self.isSecure = NO;
-        
-        //TODO 检查inputstream是否为空
+
         [self.inputStream setDelegate:self];
         [self.outputStream setDelegate:self];
-        
+
         [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [self.inputStream open];
         [self.outputStream open];
         
         self.inputString = [NSMutableString string];
- 
+        //
+        if(![[NSRunLoop currentRunLoop] isEqual:[NSRunLoop mainRunLoop]]){
+            [[NSRunLoop currentRunLoop] run];
+        }
+        
         return YES;
     }
     else

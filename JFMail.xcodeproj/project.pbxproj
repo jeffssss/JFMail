@@ -13,6 +13,12 @@
 		C22B83AC1C4690D4009F2EC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C22B83AA1C4690D4009F2EC6 /* Main.storyboard */; };
 		C22B83AE1C4690D4009F2EC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22B83AD1C4690D4009F2EC6 /* Assets.xcassets */; };
 		C22B83B11C4690D4009F2EC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C22B83AF1C4690D4009F2EC6 /* LaunchScreen.storyboard */; };
+		C22B83BB1C46971C009F2EC6 /* JFMailSender.m in Sources */ = {isa = PBXBuildFile; fileRef = C22B83BA1C46971C009F2EC6 /* JFMailSender.m */; };
+		C22B83BD1C469ECA009F2EC6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C22B83BC1C469ECA009F2EC6 /* CFNetwork.framework */; };
+		C22B83BF1C469F20009F2EC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C22B83BE1C469F20009F2EC6 /* Foundation.framework */; };
+		C22B83C11C469F29009F2EC6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C22B83C01C469F29009F2EC6 /* UIKit.framework */; };
+		C22F8CBB1C47E46900100044 /* test.vcf in Resources */ = {isa = PBXBuildFile; fileRef = C22F8CBA1C47E46900100044 /* test.vcf */; };
+		C2476A751C47BD2B0007FA32 /* HSK_CFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C2476A741C47BD2B0007FA32 /* HSK_CFUtilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,14 @@
 		C22B83AD1C4690D4009F2EC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C22B83B01C4690D4009F2EC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C22B83B21C4690D4009F2EC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C22B83B91C46971C009F2EC6 /* JFMailSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMailSender.h; sourceTree = "<group>"; };
+		C22B83BA1C46971C009F2EC6 /* JFMailSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMailSender.m; sourceTree = "<group>"; };
+		C22B83BC1C469ECA009F2EC6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		C22B83BE1C469F20009F2EC6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C22B83C01C469F29009F2EC6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C22F8CBA1C47E46900100044 /* test.vcf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.vcf; sourceTree = "<group>"; };
+		C2476A731C47BD2B0007FA32 /* HSK_CFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSK_CFUtilities.h; sourceTree = "<group>"; };
+		C2476A741C47BD2B0007FA32 /* HSK_CFUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSK_CFUtilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +47,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C22B83C11C469F29009F2EC6 /* UIKit.framework in Frameworks */,
+				C22B83BF1C469F20009F2EC6 /* Foundation.framework in Frameworks */,
+				C22B83BD1C469ECA009F2EC6 /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,7 +59,11 @@
 		C22B83951C4690D4009F2EC6 = {
 			isa = PBXGroup;
 			children = (
-				C22B83A01C4690D4009F2EC6 /* JFMail */,
+				C22B83C01C469F29009F2EC6 /* UIKit.framework */,
+				C22B83BE1C469F20009F2EC6 /* Foundation.framework */,
+				C22B83BC1C469ECA009F2EC6 /* CFNetwork.framework */,
+				C22B83B81C4696F1009F2EC6 /* lib */,
+				C22B83A01C4690D4009F2EC6 /* Demo */,
 				C22B839F1C4690D4009F2EC6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,7 +76,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C22B83A01C4690D4009F2EC6 /* JFMail */ = {
+		C22B83A01C4690D4009F2EC6 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				C22B83A41C4690D4009F2EC6 /* AppDelegate.h */,
@@ -68,15 +89,28 @@
 				C22B83B21C4690D4009F2EC6 /* Info.plist */,
 				C22B83A11C4690D4009F2EC6 /* Supporting Files */,
 			);
+			name = Demo;
 			path = JFMail;
 			sourceTree = "<group>";
 		};
 		C22B83A11C4690D4009F2EC6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C22F8CBA1C47E46900100044 /* test.vcf */,
 				C22B83A21C4690D4009F2EC6 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C22B83B81C4696F1009F2EC6 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				C2476A731C47BD2B0007FA32 /* HSK_CFUtilities.h */,
+				C2476A741C47BD2B0007FA32 /* HSK_CFUtilities.m */,
+				C22B83B91C46971C009F2EC6 /* JFMailSender.h */,
+				C22B83BA1C46971C009F2EC6 /* JFMailSender.m */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C22B83B11C4690D4009F2EC6 /* LaunchScreen.storyboard in Resources */,
+				C22F8CBB1C47E46900100044 /* test.vcf in Resources */,
 				C22B83AE1C4690D4009F2EC6 /* Assets.xcassets in Resources */,
 				C22B83AC1C4690D4009F2EC6 /* Main.storyboard in Resources */,
 			);
@@ -150,7 +185,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2476A751C47BD2B0007FA32 /* HSK_CFUtilities.m in Sources */,
 				C22B83A91C4690D4009F2EC6 /* ViewController.m in Sources */,
+				C22B83BB1C46971C009F2EC6 /* JFMailSender.m in Sources */,
 				C22B83A61C4690D4009F2EC6 /* AppDelegate.m in Sources */,
 				C22B83A31C4690D4009F2EC6 /* main.m in Sources */,
 			);
@@ -263,6 +300,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = JFMail/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JF.JFMail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -274,6 +312,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = JFMail/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JF.JFMail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -299,6 +338,7 @@
 				C22B83B71C4690D4009F2EC6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

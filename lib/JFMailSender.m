@@ -78,12 +78,11 @@ NSString *smtpPartContentTransferEncodingKey = @"smtpPartContentTransferEncoding
     self.fromEmail = nil;
     self.toEmail = nil;
     self.ccEmail = nil;
-    self.bccEmail = nil;
     self.parts = nil;
     self.inputString = nil;
     self.inputStream = nil;
     self.outputStream = nil;
-    
+    self.fromName = nil;
     [self.connectTimer invalidate];
     self.connectTimer = nil;
     
@@ -105,8 +104,7 @@ NSString *smtpPartContentTransferEncodingKey = @"smtpPartContentTransferEncoding
     mailSenderCopy.wantsSecure = self.wantsSecure;
     mailSenderCopy.validateSSLChain = self.validateSSLChain;
     mailSenderCopy.ccEmail = self.ccEmail;
-    mailSenderCopy.bccEmail = self.bccEmail;
-    
+    mailSenderCopy.fromName = self.fromName;
     return mailSenderCopy;
 }
 
@@ -429,7 +427,7 @@ NSString *smtpPartContentTransferEncodingKey = @"smtpPartContentTransferEncoding
                             if (self.serverAuthPLAIN){
                                 self.sendState = smtpWaitingAuthSuccess;
                                 NSString *loginString = [NSString stringWithFormat:@"\000%@\000%@", self.login, self.pass];
-                                NSString *authString = [NSString stringWithFormat:@"AUTH PLAIN %@\r\n", [[loginString dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];//TODO:如果有问题的话，检查下是不是这里的问题。
+                                NSString *authString = [NSString stringWithFormat:@"AUTH PLAIN %@\r\n", [[loginString dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
                                 NSLog(@"C: %@", authString);
                                 if (CFWriteStreamWriteFully((__bridge CFWriteStreamRef)self.outputStream, (const uint8_t *)[authString UTF8String], [authString lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) < 0){
                                     error =  [self.outputStream streamError];
@@ -524,7 +522,7 @@ NSString *smtpPartContentTransferEncodingKey = @"smtpPartContentTransferEncoding
                     if ([tmpLine hasPrefix:@"334 VXNlcm5hbWU6"]){
                         self.sendState = smtpWaitingLOGINPasswordReply;
                         
-                        NSString *authString = [NSString stringWithFormat:@"%@\r\n", [[self.login dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];//TODO:base64加密先用自带的试试
+                        NSString *authString = [NSString stringWithFormat:@"%@\r\n", [[self.login dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
                         NSLog(@"C: %@", authString);
                         if (CFWriteStreamWriteFully((__bridge CFWriteStreamRef)self.outputStream, (const uint8_t *)[authString UTF8String], [authString lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) < 0){
                             error =  [self.outputStream streamError];
@@ -540,7 +538,7 @@ NSString *smtpPartContentTransferEncodingKey = @"smtpPartContentTransferEncoding
                     if ([tmpLine hasPrefix:@"334 UGFzc3dvcmQ6"]){
                         self.sendState = smtpWaitingAuthSuccess;
                         
-                        NSString *authString = [NSString stringWithFormat:@"%@\r\n", [[self.pass dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];//TODO:base64加密
+                        NSString *authString = [NSString stringWithFormat:@"%@\r\n", [[self.pass dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
                         NSLog(@"C: %@", authString);
                         if (CFWriteStreamWriteFully((__bridge CFWriteStreamRef)self.outputStream, (const uint8_t *)[authString UTF8String], [authString lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) < 0){
                             error =  [self.outputStream streamError];
@@ -701,8 +699,11 @@ NSString *smtpPartContentTransferEncodingKey = @"smtpPartContentTransferEncoding
     
     [message appendFormat:@"Date: %@\r\n", [dateFormatter stringFromDate:now]];
     [message appendFormat:@"Message-id: <%@@%@>\r\n", [(NSString *)uuid stringByReplacingOccurrencesOfString:@"-" withString:@""], self.relayHost];
-    
-    [message appendFormat:@"From:%@\r\n", self.fromEmail];
+    if (self.fromName) {
+        [message appendFormat:@"From:\"%@\"%@\r\n",[JFMailSender chineseCharacterEncodingFileNameWithFileName:self.fromName],self.fromEmail];
+    } else {
+        [message appendFormat:@"From:%@\r\n", self.fromEmail];
+    }
     
     
     if ((self.toEmail != nil) && (![self.toEmail isEqualToString:@""])){

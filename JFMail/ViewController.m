@@ -28,6 +28,7 @@
     mailSender.pass = @"example";
     mailSender.wantsSecure = NO;
     
+    mailSender.fromName = @"积分";
     mailSender.subject = @"JF测试用邮件";
     mailSender.delegate = self;
     

@@ -73,9 +73,10 @@ extern NSString *smtpPartContentTransferEncodingKey;
 
 @property(nonatomic, copy) NSString *subject;
 @property(nonatomic, copy) NSString *fromEmail;
+@property(nonatomic, copy) NSString *fromName;
 @property(nonatomic, copy) NSString *toEmail;
 @property(nonatomic, copy) NSString *ccEmail;
-@property(nonatomic, copy) NSString *bccEmail;
+
 @property(nonatomic, strong) NSArray *parts;
 
 @property(nonatomic, assign) NSTimeInterval connectTimeout;

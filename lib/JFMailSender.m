@@ -824,4 +824,16 @@ NSString *smtpPartContentTransferEncodingKey = @"smtpPartContentTransferEncoding
     self.outputStream = nil;
 }
 
++ (NSDictionary *)partWithType:(PartType)type Message:(NSString *)message ContentType:(NSString *)contentType ContentTransferEncoding:(NSString *)contentTransferEncoding FileName:(NSString *)fileName{
+    if(type == PartTypePlainPart){
+        return [NSDictionary dictionaryWithObjectsAndKeys:contentType,smtpPartContentTypeKey,message,smtpPartMessageKey,contentTransferEncoding,smtpPartContentTransferEncodingKey,nil];
+    } else {
+        return [NSDictionary dictionaryWithObjectsAndKeys:contentType,smtpPartContentTypeKey,
+                                        [NSString stringWithFormat:@"attachment;\r\n\tfilename=\"%@\"",fileName],smtpPartContentDispositionKey,message,smtpPartMessageKey,contentTransferEncoding,smtpPartContentTransferEncodingKey,nil];
+    }
+}
+
++ (NSString *)chineseCharacterEncodingFileNameWithFileName:(NSString *)fileName{
+    return [NSString stringWithFormat:@"=?UTF-8?B?%@?=",[[fileName dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
+}
 @end

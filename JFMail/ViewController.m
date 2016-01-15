@@ -40,12 +40,19 @@
     NSDictionary *vcfPart = [NSDictionary dictionaryWithObjectsAndKeys:@"text/directory;\r\n\tx-unix-mode=0644;\r\n\tname=\"test.vcf\"",smtpPartContentTypeKey,
                              @"attachment;\r\n\tfilename=\"test.vcf\"",smtpPartContentDispositionKey,[vcfData base64EncodedStringWithOptions:0],smtpPartMessageKey,@"base64",smtpPartContentTransferEncodingKey,nil];
     
-    mailSender.parts = [NSArray arrayWithObjects:plainPart,vcfPart,nil];
-    dispatch_async(dispatch_get_main_queue(), ^{
+    NSString *fileName = [JFMailSender chineseCharacterEncodingFileNameWithFileName:@"测试.vcf"];
+    //the other ways to create Part Dictionary.
+    NSDictionary *vcfPart2 = [JFMailSender partWithType:PartTypeFilePart
+                                                Message:[vcfData base64EncodedStringWithOptions:0]
+                                            ContentType:[NSString stringWithFormat:@"text/directory;\r\n\tx-unix-mode=0644;\r\n\tname=\"%@\"",fileName]
+                                ContentTransferEncoding:@"base64"
+                                               FileName:fileName];
+    
+    mailSender.parts = [NSArray arrayWithObjects:plainPart,vcfPart,vcfPart2,nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
         [mailSender sendMail];
     });
-
-    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -56,11 +63,13 @@
 
 - (void)mailSent:(JFMailSender *)message
 {
+    //if something must run in main thread,please use dispatch_get_main_queue();
     NSLog(@"Yay! Message was sent!");
 }
 
 - (void)mailFailed:(JFMailSender *)message error:(NSError *)error
 {
+    //if something must run in main thread,please use dispatch_get_main_queue();
     NSLog(@"%@", [NSString stringWithFormat:@"Darn! Error!\n%i: %@\n%@", [error code], [error localizedDescription], [error localizedRecoverySuggestion]]);
 }
 

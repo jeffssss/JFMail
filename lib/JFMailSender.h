@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CFNetwork/CFNetwork.h>
 
-enum
-{
+enum{
     smtpIdle = 0,
     smtpConnecting,
     smtpWaitingEHLOReply,
@@ -25,6 +24,11 @@ enum
     smtpWaitingQuitReply,
     smtpMessageSent
 };
+
+typedef enum{
+    PartTypeFilePart = 0,
+    PartTypePlainPart
+} PartType;
 
 typedef NSUInteger SmtpState;
 // Message part keys
@@ -79,5 +83,10 @@ extern NSString *smtpPartContentTransferEncodingKey;
 @property(nonatomic, assign) id <JFMailSenderDelegate> delegate;
 
 - (BOOL)sendMail;
+
++ (NSDictionary *)partWithType:(PartType)type Message:(NSString *)message ContentType:(NSString *)contentType ContentTransferEncoding:(NSString *)contentTransferEncoding FileName:(NSString *)fileName;
+
+//solve chinese character encoding problem on attachment filename
++ (NSString *)chineseCharacterEncodingFileNameWithFileName:(NSString *)fileName;
 
 @end

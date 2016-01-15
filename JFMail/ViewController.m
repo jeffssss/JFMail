@@ -32,9 +32,11 @@
     mailSender.subject = @"JF测试用邮件";
     mailSender.delegate = self;
     
-    NSDictionary *plainPart = [NSDictionary dictionaryWithObjectsAndKeys:@"text/plain; charset=UTF-8",smtpPartContentTypeKey,
-                               @"ceshiceshiceshi 测试测试测试.",smtpPartMessageKey,@"8bit",smtpPartContentTransferEncodingKey,nil];
     
+    NSDictionary *plainPart = [NSDictionary dictionaryWithObjectsAndKeys:@"text/plain; charset=UTF-8",smtpPartContentTypeKey,
+                               @"ceshiceshiceshi 测试测试测试.<br><h1>天气不错</h1>",smtpPartMessageKey,@"8bit",smtpPartContentTransferEncodingKey,nil];
+//    NSDictionary *plainPart2 = [NSDictionary dictionaryWithObjectsAndKeys:@"text/html; charset=UTF-8",smtpPartContentTypeKey,
+//                               @"ceshiceshiceshi 测试测试测试.<br><h1>天气不错</h1>",smtpPartMessageKey,@"8bit",smtpPartContentTransferEncodingKey,nil];
     NSString *vcfPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"vcf"];
     NSData *vcfData = [NSData dataWithContentsOfFile:vcfPath];
     

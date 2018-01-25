@@ -19,9 +19,8 @@ Any probleam, please [issue](https://github.com/jeffssss/JFMail/issues). I will 
 
 ## Use JFMail
 
-copy files in `JFMail/lib/` into your own project.
+use `pod 'JFMail', '~> 0.0.1'` or copy files in `JFMail/lib/` into your own project.
 
-After fixing problems above and testing , you can use cocoaPods.
 
 ## Demo
 
